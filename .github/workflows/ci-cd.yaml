@@ -4,13 +4,20 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  Build:
+  build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Checkout code
         uses: actions/checkout@v4
 
