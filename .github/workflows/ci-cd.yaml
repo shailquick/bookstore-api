@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 jobs:
-  build-and-push:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
